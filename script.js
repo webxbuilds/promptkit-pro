@@ -13,11 +13,63 @@ document.addEventListener('DOMContentLoaded', () => {
   'use strict';
 
   /* --------------------------------------------------------------------------
-     1. Bind Checkout URL to all purchase buttons
+     1. Bind Checkout URL & Meta Pixel InitiateCheckout Tracking
      -------------------------------------------------------------------------- */
-  const checkoutButtons = document.querySelectorAll('.checkout-cta-btn');
+  const checkoutButtons = document.querySelectorAll('.checkout-cta-btn, [data-checkout-btn], a[href*="superprofile.bio"]');
+  let isCheckoutInProgress = false;
+
+  const handleCheckoutClick = (e) => {
+    // Prevent duplicate checkout events (e.g. rapid double clicks)
+    if (isCheckoutInProgress) {
+      e.preventDefault();
+      return;
+    }
+    isCheckoutInProgress = true;
+
+    // Fire Meta Pixel InitiateCheckout event
+    if (typeof window.fbq === 'function') {
+      try {
+        window.fbq('track', 'InitiateCheckout', {
+          content_name: 'PromptKit Pro — 99+ AI Prompts for UGC Ads & Product Visuals',
+          value: 299,
+          currency: 'INR'
+        });
+      } catch (err) {
+        console.warn('Meta Pixel InitiateCheckout tracking error:', err);
+      }
+    }
+
+    // Support user intent for opening in new tab/window (Ctrl/Cmd/middle click)
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) {
+      setTimeout(() => {
+        isCheckoutInProgress = false;
+      }, 2000);
+      return;
+    }
+
+    e.preventDefault();
+
+    // Allow time for Meta Pixel beacon to dispatch before redirecting
+    setTimeout(() => {
+      window.location.href = PRODUCT_CHECKOUT_URL;
+    }, 200);
+
+    // Safety timeout in case navigation is delayed or cancelled
+    setTimeout(() => {
+      isCheckoutInProgress = false;
+    }, 4000);
+  };
+
   checkoutButtons.forEach(btn => {
     btn.setAttribute('href', PRODUCT_CHECKOUT_URL);
+    btn.addEventListener('click', handleCheckoutClick);
+  });
+
+  // Reset checkout lock if user navigates back via bfcache
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) {
+      isCheckoutInProgress = false;
+    }
   });
 
   /* --------------------------------------------------------------------------
