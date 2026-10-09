@@ -9,7 +9,7 @@
    ========================================================================== */
 const PRODUCT_CHECKOUT_URL = "https://superprofile.bio/vp/promptkit-pro-%E2%80%94-99--ai-prompts-for-ugc-ads---product-visuals";
 
-document.addEventListener('DOMContentLoaded', () => {
+const initPromptKit = () => {
   'use strict';
 
   /* --------------------------------------------------------------------------
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { src: 'images/54 UGC Script Prompts Laptop Promo(1).png', alt: 'UGC Hook & Script Prompts' }
   ];
 
-  let currentLightboxList = galleryImages;
+  let currentLightboxList = heroImageItem;
   let activeLightboxIndex = 0;
 
   const openLightbox = (index, list = null) => {
@@ -139,9 +139,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const imgSrc = trigger.getAttribute('data-img');
-      const foundIdx = galleryImages.findIndex(img => img.src === imgSrc);
+      const foundIdx = previewImages.findIndex(img => img.src === imgSrc);
       if (foundIdx !== -1) {
-        openLightbox(foundIdx, galleryImages);
+        openLightbox(foundIdx, previewImages);
       } else if (imgSrc && lightboxActiveImg) {
         currentLightboxList = [{ src: imgSrc, alt: 'Preview' }];
         openLightbox(0);
@@ -447,6 +447,9 @@ document.addEventListener('DOMContentLoaded', () => {
      11. Flash Sale Countdown Timer (Counts down from 04h : 18m : 30s)
      -------------------------------------------------------------------------- */
   const initCountdown = () => {
+    if (window.__promptKitCountdownRunning) return;
+    window.__promptKitCountdownRunning = true;
+
     const hoursEl = document.getElementById('cd-hours');
     const minsEl = document.getElementById('cd-mins');
     const secsEl = document.getElementById('cd-secs');
@@ -454,30 +457,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Start countdown from 4 hours, 18 minutes, 30 seconds
     const INITIAL_DURATION_SECS = (4 * 3600) + (18 * 60) + 30;
-    const STORAGE_KEY = 'promptkit_flash_deal_deadline_v4';
+    const STORAGE_KEY = 'promptkit_flash_deal_deadline_v6';
     
-    let deadline = parseInt(localStorage.getItem(STORAGE_KEY), 10);
-    const now = Date.now();
+    let deadline = null;
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        deadline = parseInt(saved, 10);
+      }
+    } catch (e) {
+      console.warn('localStorage read error:', e);
+    }
 
-    // If deadline does not exist, or has expired, start a fresh deadline from now
-    if (!deadline || deadline <= now) {
+    const now = Date.now();
+    // If deadline does not exist, is invalid, or has expired, start a fresh deadline from now
+    if (!deadline || isNaN(deadline) || deadline <= now) {
       deadline = now + (INITIAL_DURATION_SECS * 1000);
-      localStorage.setItem(STORAGE_KEY, deadline.toString());
+      try {
+        localStorage.setItem(STORAGE_KEY, deadline.toString());
+      } catch (e) {}
     }
 
     const updateTimer = () => {
-      const remainingMs = Math.max(0, deadline - Date.now());
-      let remainingSecs = Math.floor(remainingMs / 1000);
+      const currentNow = Date.now();
+      let remainingMs = deadline - currentNow;
 
-      if (remainingSecs <= 0) {
-        deadline = Date.now() + (INITIAL_DURATION_SECS * 1000);
-        localStorage.setItem(STORAGE_KEY, deadline.toString());
-        remainingSecs = INITIAL_DURATION_SECS;
+      if (remainingMs <= 0) {
+        deadline = currentNow + (INITIAL_DURATION_SECS * 1000);
+        try {
+          localStorage.setItem(STORAGE_KEY, deadline.toString());
+        } catch (e) {}
+        remainingMs = INITIAL_DURATION_SECS * 1000;
       }
 
-      const h = Math.floor(remainingSecs / 3600);
-      const m = Math.floor((remainingSecs % 3600) / 60);
-      const s = remainingSecs % 60;
+      const totalSecs = Math.max(0, Math.floor(remainingMs / 1000));
+      const h = Math.floor(totalSecs / 3600);
+      const m = Math.floor((totalSecs % 3600) / 60);
+      const s = totalSecs % 60;
 
       hoursEl.textContent = String(h).padStart(2, '0');
       minsEl.textContent = String(m).padStart(2, '0');
@@ -508,4 +524,10 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', checkStickyVisibility, { passive: true });
     checkStickyVisibility();
   }
-});
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initPromptKit);
+} else {
+  initPromptKit();
+}

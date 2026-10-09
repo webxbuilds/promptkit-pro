@@ -27,7 +27,7 @@
   <!-- Favicon & Stylesheet -->
   <link rel="icon" type="image/png" href="images/promptkit-pro-main.png">
   <link rel="preload" as="image" href="images/promptkit-pro-main.webp" type="image/webp" fetchpriority="high">
-  <link rel="stylesheet" href="style.css?v=2.4">
+  <link rel="stylesheet" href="style.css?v=2.6">
 
   <!-- Meta Pixel Code -->
   <script>
@@ -312,6 +312,57 @@
                 </div>
               </div>
             </div>
+
+            <!-- Instant Countdown Auto-Runner (Ensures timer actively ticks down immediately) -->
+            <script>
+              (function() {
+                function startFlashCountdown() {
+                  if (window.__promptKitCountdownRunning) return;
+                  var hEl = document.getElementById('cd-hours');
+                  var mEl = document.getElementById('cd-mins');
+                  var sEl = document.getElementById('cd-secs');
+                  if (!hEl || !mEl || !sEl) return;
+                  window.__promptKitCountdownRunning = true;
+
+                  var INITIAL_SECS = (4 * 3600) + (18 * 60) + 30; // 04h : 18m : 30s
+                  var KEY = 'promptkit_flash_deal_deadline_v6';
+                  var deadline = null;
+                  try {
+                    var saved = localStorage.getItem(KEY);
+                    if (saved) deadline = parseInt(saved, 10);
+                  } catch (e) {}
+
+                  var now = Date.now();
+                  if (!deadline || isNaN(deadline) || deadline <= now) {
+                    deadline = now + (INITIAL_SECS * 1000);
+                    try { localStorage.setItem(KEY, deadline.toString()); } catch (e) {}
+                  }
+
+                  function tick() {
+                    var diff = deadline - Date.now();
+                    if (diff <= 0) {
+                      deadline = Date.now() + (INITIAL_SECS * 1000);
+                      try { localStorage.setItem(KEY, deadline.toString()); } catch (e) {}
+                      diff = INITIAL_SECS * 1000;
+                    }
+                    var sTotal = Math.max(0, Math.floor(diff / 1000));
+                    var h = Math.floor(sTotal / 3600);
+                    var m = Math.floor((sTotal % 3600) / 60);
+                    var s = sTotal % 60;
+                    hEl.textContent = (h < 10 ? '0' : '') + h;
+                    mEl.textContent = (m < 10 ? '0' : '') + m;
+                    sEl.textContent = (s < 10 ? '0' : '') + s;
+                  }
+                  tick();
+                  setInterval(tick, 1000);
+                }
+                if (document.readyState === 'loading') {
+                  document.addEventListener('DOMContentLoaded', startFlashCountdown);
+                } else {
+                  startFlashCountdown();
+                }
+              })();
+            </script>
 
             <!-- Price Row -->
             <div class="price-row">
@@ -1242,6 +1293,6 @@
   </div>
 
   <!-- JavaScript -->
-  <script src="script.js?v=2.4"></script>
+  <script src="script.js?v=2.6"></script>
 </body>
 </html>
