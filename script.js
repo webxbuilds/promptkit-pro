@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
      2. Product Hero Gallery (Main Display & Thumbnails)
      -------------------------------------------------------------------------- */
   const galleryImages = [
-    { src: 'images/hero-mockup.png', alt: 'PromptKit Pro Main Product Image' },
+    { src: 'images/promptkit-pro-main.png', alt: 'PromptKit Pro Main Product Image' },
     { src: 'images/Problem-Solution Script on iPhone(1).png', alt: 'Problem-Solution Script on iPhone' },
     { src: 'images/Serum Glow-Up_ Before to After.png', alt: 'Serum Glow-Up Before/After' },
     { src: 'images/54 UGC Script Prompts Laptop Promo(1).png', alt: '54 UGC Script Prompts Laptop Promo' }
