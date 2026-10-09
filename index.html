@@ -26,7 +26,7 @@
 
   <!-- Favicon & Stylesheet -->
   <link rel="icon" type="image/png" href="images/promptkit-pro-main.png">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2.2">
 
   <!-- Meta Pixel Code -->
   <script>
@@ -242,51 +242,108 @@
         <!-- RIGHT COLUMN: Product Information & Purchase (45%) -->
         <div class="product-info-sticky">
           
-          <!-- Access Badge -->
-          <div class="access-badge">
-            <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
-            INSTANT DIGITAL ACCESS
+          <!-- Top Badges & Live Social Proof -->
+          <div class="hero-top-badges">
+            <div class="access-badge">
+              <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+              INSTANT DIGITAL ACCESS
+            </div>
+            <div class="rating-strip" aria-label="Rating 4.9 out of 5 stars based on customer reviews">
+              <span class="stars">★★★★★</span>
+              <span class="rating-score">4.9/5</span>
+              <span class="rating-divider">•</span>
+              <span class="rating-count">240+ creators bought</span>
+            </div>
           </div>
 
-          <!-- Title Area -->
+          <!-- Title Area with High-Converting Hook -->
           <div class="product-title-area">
             <h1>PromptKit Pro</h1>
             <p class="product-tagline">99+ AI Prompts for UGC Ads & Product Visuals</p>
             <p class="product-desc">
-              A ready-to-use AI prompt system designed to help you create UGC ads, product visuals, creative concepts and marketing content faster.
+              Stop staring at a blank screen. Generate viral 30-second TikTok & Reels UGC scripts and studio-grade 8K product photo shoots in under 60 seconds with copy-paste prompts.
             </p>
           </div>
 
-          <!-- Product Value Indicators -->
-          <div class="value-pills">
-            <div class="value-pill-item">
-              <span class="check">✓</span> Ready to Use
+          <!-- High-Converting Deliverables Value Stack -->
+          <div class="deliverables-stack" aria-label="What is included inside PromptKit Pro">
+            <div class="deliverable-item">
+              <div class="deliverable-icon-wrap" aria-hidden="true">⚡</div>
+              <div class="deliverable-content">
+                <span class="deliverable-title">54+ Viral UGC Video Script Prompts</span>
+                <span class="deliverable-desc">Hooks, problem-solution & CTAs for TikTok, Reels & Shorts</span>
+              </div>
             </div>
-            <div class="value-pill-item">
-              <span class="check">✓</span> Instant Digital Access
+            <div class="deliverable-item">
+              <div class="deliverable-icon-wrap" aria-hidden="true">📸</div>
+              <div class="deliverable-content">
+                <span class="deliverable-title">25+ Hyper-Realistic 8K Product Photo Prompts</span>
+                <span class="deliverable-desc">Midjourney & ChatGPT prompts for cosmetics, tech & fashion</span>
+              </div>
             </div>
-            <div class="value-pill-item">
-              <span class="check">✓</span> Beginner Friendly
+            <div class="deliverable-item">
+              <div class="deliverable-icon-wrap" aria-hidden="true">📢</div>
+              <div class="deliverable-content">
+                <span class="deliverable-title">20+ High-Converting Ad Copy Frameworks</span>
+                <span class="deliverable-desc">AIDA, PAS & objection-crushing angles for Meta & Google ads</span>
+              </div>
+            </div>
+            <div class="deliverable-item deliverable-bonus">
+              <div class="deliverable-icon-wrap" aria-hidden="true">🎁</div>
+              <div class="deliverable-content">
+                <span class="deliverable-title">FREE Bonus: AI Setup & Workflow Cheatsheet</span>
+                <span class="deliverable-desc">Master Midjourney v6 & ChatGPT-4o prompting rules in 5 mins</span>
+              </div>
             </div>
           </div>
 
-          <!-- Trust / Value Line -->
-          <div class="trust-line">
-            <span class="trust-line-icon">✦</span>
-            <span>Built for faster creative production • Premium AI Prompt Collection</span>
-          </div>
-
-          <!-- Price Card -->
+          <!-- Price Card with Dynamic Countdown & Scarcity Bar -->
           <div class="price-card">
+            <!-- Flash Sale Urgency Bar -->
+            <div class="flash-sale-banner">
+              <div class="flash-sale-header">
+                <div class="flash-sale-badge">
+                  <span class="live-pulse-dot"></span>
+                  <span>FLASH DEAL ENDS IN:</span>
+                </div>
+                <div class="hero-countdown" id="hero-countdown" aria-label="Limited time offer countdown">
+                  <div class="countdown-unit">
+                    <span class="countdown-num" id="cd-hours">04</span>
+                    <span class="countdown-lbl">h</span>
+                  </div>
+                  <span class="countdown-sep">:</span>
+                  <div class="countdown-unit">
+                    <span class="countdown-num" id="cd-mins">18</span>
+                    <span class="countdown-lbl">m</span>
+                  </div>
+                  <span class="countdown-sep">:</span>
+                  <div class="countdown-unit">
+                    <span class="countdown-num" id="cd-secs">30</span>
+                    <span class="countdown-lbl">s</span>
+                  </div>
+                </div>
+              </div>
+              <div class="scarcity-bar-wrap">
+                <div class="scarcity-bar-info">
+                  <span class="scarcity-label">🔥 Limited Launch Offer</span>
+                  <span class="scarcity-spots">Only <strong>7 copies left</strong> at ₹299</span>
+                </div>
+                <div class="scarcity-progress-track">
+                  <div class="scarcity-progress-fill" style="width: 86%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Price Row -->
             <div class="price-row">
               <span class="current-price" aria-label="Offer Price">₹299</span>
               <span class="original-price" aria-label="Original Price">₹2,500</span>
               <span class="discount-badge">88% OFF</span>
             </div>
             
-            <p class="price-save-line">You save ₹2,201 on this purchase!</p>
+            <p class="price-save-line">You save ₹2,201 on this purchase today!</p>
             
             <p class="price-note">
               <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
@@ -297,14 +354,23 @@
             </p>
           </div>
 
-          <!-- Main CTA Actions -->
+          <!-- Main CTA Actions with Animated Glow & Micro-Guarantees -->
           <div class="purchase-actions">
-            <a href="https://superprofile.bio/vp/promptkit-pro-%E2%80%94-99--ai-prompts-for-ugc-ads---product-visuals" class="btn-primary-buy checkout-cta-btn" id="hero-buy-btn">
+            <a href="https://superprofile.bio/vp/promptkit-pro-%E2%80%94-99--ai-prompts-for-ugc-ads---product-visuals" class="btn-primary-buy checkout-cta-btn glow-cta" id="hero-buy-btn">
               <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
               </svg>
               ⚡ Get PromptKit Pro — ₹299
             </a>
+
+            <!-- Micro-Guarantees Strip -->
+            <div class="cta-micro-guarantee">
+              <span>🔒 Instant Access</span>
+              <span>•</span>
+              <span>⚡ Lifetime Updates</span>
+              <span>•</span>
+              <span>💳 Secure Checkout</span>
+            </div>
 
             <button type="button" class="btn-secondary-wishlist" id="hero-wishlist-toggle">
               <svg fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24" aria-hidden="true">
@@ -1199,6 +1265,6 @@
   </div>
 
   <!-- JavaScript -->
-  <script src="script.js"></script>
+  <script src="script.js?v=2.2"></script>
 </body>
 </html>

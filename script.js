@@ -497,4 +497,70 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   });
+
+  /* --------------------------------------------------------------------------
+     11. Flash Sale Countdown Timer (Counts down from 04h : 18m : 30s)
+     -------------------------------------------------------------------------- */
+  const initCountdown = () => {
+    const hoursEl = document.getElementById('cd-hours');
+    const minsEl = document.getElementById('cd-mins');
+    const secsEl = document.getElementById('cd-secs');
+    if (!hoursEl || !minsEl || !secsEl) return;
+
+    // Start countdown from 4 hours, 18 minutes, 30 seconds
+    const INITIAL_DURATION_SECS = (4 * 3600) + (18 * 60) + 30;
+    const STORAGE_KEY = 'promptkit_flash_deal_deadline_v4';
+    
+    let deadline = parseInt(localStorage.getItem(STORAGE_KEY), 10);
+    const now = Date.now();
+
+    // If deadline does not exist, or has expired, start a fresh deadline from now
+    if (!deadline || deadline <= now) {
+      deadline = now + (INITIAL_DURATION_SECS * 1000);
+      localStorage.setItem(STORAGE_KEY, deadline.toString());
+    }
+
+    const updateTimer = () => {
+      const remainingMs = Math.max(0, deadline - Date.now());
+      let remainingSecs = Math.floor(remainingMs / 1000);
+
+      if (remainingSecs <= 0) {
+        deadline = Date.now() + (INITIAL_DURATION_SECS * 1000);
+        localStorage.setItem(STORAGE_KEY, deadline.toString());
+        remainingSecs = INITIAL_DURATION_SECS;
+      }
+
+      const h = Math.floor(remainingSecs / 3600);
+      const m = Math.floor((remainingSecs % 3600) / 60);
+      const s = remainingSecs % 60;
+
+      hoursEl.textContent = String(h).padStart(2, '0');
+      minsEl.textContent = String(m).padStart(2, '0');
+      secsEl.textContent = String(s).padStart(2, '0');
+    };
+
+    updateTimer();
+    setInterval(updateTimer, 1000);
+  };
+  initCountdown();
+
+  /* --------------------------------------------------------------------------
+     12. Mobile Sticky Buy Bar Scroll Behavior
+     -------------------------------------------------------------------------- */
+  const mobileStickyBar = document.getElementById('mobile-sticky-buy-bar');
+  const heroBuyBtn = document.getElementById('hero-buy-btn');
+
+  if (mobileStickyBar && heroBuyBtn) {
+    const checkStickyVisibility = () => {
+      const rect = heroBuyBtn.getBoundingClientRect();
+      const inView = rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight);
+      if (inView) {
+        mobileStickyBar.classList.add('hide-sticky');
+      } else {
+        mobileStickyBar.classList.remove('hide-sticky');
+      }
+    };
+    window.addEventListener('scroll', checkStickyVisibility, { passive: true });
+    checkStickyVisibility();
+  }
 });
