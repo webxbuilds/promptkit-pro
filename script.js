@@ -73,68 +73,13 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* --------------------------------------------------------------------------
-     2. Product Hero Gallery (Main Display & Thumbnails)
+     2. Product Hero Showcase (Single Dedicated Visual)
      -------------------------------------------------------------------------- */
-  const galleryImages = [
-    { src: 'images/promptkit-pro-main.png', alt: 'PromptKit Pro Main Product Image' },
-    { src: 'images/Problem-Solution Script on iPhone(1).png', alt: 'Problem-Solution Script on iPhone' },
-    { src: 'images/Serum Glow-Up_ Before to After.png', alt: 'Serum Glow-Up Before/After' },
-    { src: 'images/54 UGC Script Prompts Laptop Promo(1).png', alt: '54 UGC Script Prompts Laptop Promo' }
-  ];
-
-  let currentGalleryIndex = 0;
-  const mainProductImg = document.getElementById('main-product-img');
-  const counterBadge = document.getElementById('image-counter-badge');
-  const thumbnailBtns = document.querySelectorAll('.thumbnail-btn');
-  const prevBtn = document.getElementById('gallery-prev-btn');
-  const nextBtn = document.getElementById('gallery-next-btn');
   const mainGalleryView = document.getElementById('main-gallery-view');
-
-  const updateGallery = (index) => {
-    if (index < 0) index = galleryImages.length - 1;
-    if (index >= galleryImages.length) index = 0;
-    currentGalleryIndex = index;
-
-    if (mainProductImg) {
-      mainProductImg.style.opacity = '0.7';
-      setTimeout(() => {
-        mainProductImg.src = galleryImages[currentGalleryIndex].src;
-        mainProductImg.alt = galleryImages[currentGalleryIndex].alt;
-        mainProductImg.style.opacity = '1';
-      }, 100);
-    }
-
-    if (counterBadge) {
-      counterBadge.textContent = `${currentGalleryIndex + 1} / ${galleryImages.length}`;
-    }
-
-    thumbnailBtns.forEach((btn, idx) => {
-      if (idx === currentGalleryIndex) {
-        btn.classList.add('active');
-        btn.setAttribute('aria-current', 'true');
-      } else {
-        btn.classList.remove('active');
-        btn.removeAttribute('aria-current');
-      }
-    });
-  };
-
-  thumbnailBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const idx = parseInt(btn.getAttribute('data-index'), 10) || 0;
-      updateGallery(idx);
-    });
-  });
-
-  prevBtn?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    updateGallery(currentGalleryIndex - 1);
-  });
-
-  nextBtn?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    updateGallery(currentGalleryIndex + 1);
-  });
+  const heroImageItem = [{ 
+    src: 'images/promptkit-pro-main.webp', 
+    alt: 'PromptKit Pro — 99+ AI Prompts for UGC Ads & Product Visuals' 
+  }];
 
   /* --------------------------------------------------------------------------
      3. Fullscreen Image Lightbox
@@ -177,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Main gallery click opens lightbox
   mainGalleryView?.addEventListener('click', () => {
-    openLightbox(currentGalleryIndex, galleryImages);
+    openLightbox(0, heroImageItem);
   });
 
   // Any other card with .lightbox-trigger

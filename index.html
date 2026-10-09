@@ -26,7 +26,8 @@
 
   <!-- Favicon & Stylesheet -->
   <link rel="icon" type="image/png" href="images/promptkit-pro-main.png">
-  <link rel="stylesheet" href="style.css?v=2.2">
+  <link rel="preload" as="image" href="images/promptkit-pro-main.webp" type="image/webp" fetchpriority="high">
+  <link rel="stylesheet" href="style.css?v=2.4">
 
   <!-- Meta Pixel Code -->
   <script>
@@ -187,29 +188,21 @@
 
         <!-- LEFT COLUMN: Product Gallery (55%) -->
         <div class="product-gallery" id="gallery-container">
-          <!-- Main Display Card -->
+          <!-- Main Display Card (Single Dedicated Showcase Visual) -->
           <div class="main-image-card" id="main-gallery-view">
-            <img 
-              id="main-product-img" 
-              src="images/promptkit-pro-main.png" 
-              alt="PromptKit Pro — 99+ AI Prompts for UGC Ads & Product Visuals Main Mockup" 
-              loading="eager"
-            >
-            
-            <!-- Navigation Arrows -->
-            <button class="gallery-nav-btn gallery-prev" id="gallery-prev-btn" aria-label="Previous image">
-              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
-              </svg>
-            </button>
-            <button class="gallery-nav-btn gallery-next" id="gallery-next-btn" aria-label="Next image">
-              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
-              </svg>
-            </button>
-
-            <!-- Counter Badge -->
-            <div class="image-counter" id="image-counter-badge">1 / 4</div>
+            <picture>
+              <source srcset="images/promptkit-pro-main.webp" type="image/webp">
+              <img 
+                id="main-product-img" 
+                src="images/promptkit-pro-main.png" 
+                alt="PromptKit Pro — 99+ AI Prompts for UGC Ads & Product Visuals Main Mockup" 
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+                width="1672"
+                height="941"
+              >
+            </picture>
 
             <!-- Zoom Indicator -->
             <div class="zoom-indicator" aria-hidden="true">
@@ -220,22 +213,6 @@
                 <line x1="8" y1="11" x2="14" y2="11"></line>
               </svg>
             </div>
-          </div>
-
-          <!-- Thumbnail Strip (4 Real Assets) -->
-          <div class="thumbnail-strip" role="list" aria-label="Product image thumbnails">
-            <button type="button" class="thumbnail-btn active" data-index="0" aria-label="Thumbnail 1: Main Product">
-              <img src="images/promptkit-pro-main.png" alt="PromptKit Pro Main Product Image" loading="lazy">
-            </button>
-            <button type="button" class="thumbnail-btn" data-index="1" aria-label="Thumbnail 2: Problem-Solution Script">
-              <img src="images/Problem-Solution Script on iPhone(1).png" alt="Problem-Solution Script on iPhone" loading="lazy">
-            </button>
-            <button type="button" class="thumbnail-btn" data-index="2" aria-label="Thumbnail 3: Product Visual Before/After">
-              <img src="images/Serum Glow-Up_ Before to After.png" alt="Serum Glow-Up Before/After" loading="lazy">
-            </button>
-            <button type="button" class="thumbnail-btn" data-index="3" aria-label="Thumbnail 4: 54 UGC Script Prompts">
-              <img src="images/54 UGC Script Prompts Laptop Promo(1).png" alt="54 UGC Script Prompts Laptop Promo" loading="lazy">
-            </button>
           </div>
         </div>
 
@@ -1265,6 +1242,6 @@
   </div>
 
   <!-- JavaScript -->
-  <script src="script.js?v=2.2"></script>
+  <script src="script.js?v=2.4"></script>
 </body>
 </html>

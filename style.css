@@ -542,8 +542,8 @@ button {
 .main-image-card {
   position: relative;
   width: 100%;
-  height: auto;
-  background: transparent;
+  aspect-ratio: 16 / 9;
+  background: #090912;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-xl);
   overflow: hidden;
@@ -557,67 +557,22 @@ button {
   box-shadow: var(--shadow-lg);
 }
 
+.main-image-card picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .main-image-card img {
   display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
+  height: 100%;
   object-fit: contain;
   transition: transform 0.4s ease;
 }
 
 .main-image-card:hover img {
   transform: scale(1.015);
-}
-
-.gallery-nav-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(4px);
-  border: 1px solid var(--border-color);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-main);
-  box-shadow: var(--shadow-sm);
-  opacity: 0.9;
-  transition: all var(--transition-fast);
-  z-index: 5;
-}
-
-.gallery-nav-btn:hover {
-  background: var(--bg-white);
-  color: var(--primary-blue);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-50%) scale(1.06);
-}
-
-.gallery-prev {
-  left: 14px;
-}
-
-.gallery-next {
-  right: 14px;
-}
-
-.image-counter {
-  position: absolute;
-  bottom: 14px;
-  right: 14px;
-  background: rgba(15, 23, 42, 0.72);
-  backdrop-filter: blur(4px);
-  color: white;
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: var(--radius-full);
-  z-index: 5;
-  line-height: 1.2;
 }
 
 .zoom-indicator {
@@ -640,51 +595,6 @@ button {
 }
 
 .main-image-card:hover .zoom-indicator {
-  opacity: 1;
-}
-
-/* Thumbnail Gallery */
-.thumbnail-strip {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-top: 12px;
-}
-
-.thumbnail-btn {
-  position: relative;
-  aspect-ratio: 16 / 9;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  border: 2px solid transparent;
-  background: #090912;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  line-height: 0;
-}
-
-.thumbnail-btn img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: opacity var(--transition-fast);
-}
-
-.thumbnail-btn:not(.active) img {
-  opacity: 0.75;
-}
-
-.thumbnail-btn:hover img {
-  opacity: 1;
-}
-
-.thumbnail-btn.active {
-  border-color: var(--primary-blue);
-  box-shadow: 0 0 0 2px var(--primary-blue-glow);
-}
-
-.thumbnail-btn.active img {
   opacity: 1;
 }
 
@@ -1304,11 +1214,6 @@ button {
 
   .main-image-card {
     border-radius: var(--radius-lg);
-  }
-
-  .thumbnail-strip {
-    gap: 8px;
-    margin-top: 8px;
   }
 
   .product-info-sticky {
